@@ -2,7 +2,6 @@
 {
     public interface IMessageBuilder
     {
-        IMessageBuilder WithPrefix(string prefix);
         IMessageBuilder WithNamespace(string nspace);
         IMessageBuilder WithMetricName(string metricname);
         IMessageBuilder WithValue(decimal value);

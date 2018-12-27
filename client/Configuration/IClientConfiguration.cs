@@ -7,7 +7,6 @@ namespace Statful.Core.Client.Configuration
     {
         string Host { get; }
         int Port { get; }
-        string Prefix { get; }
         string Transport { get; }
         bool Secure { get; }
         int Timeout { get; }

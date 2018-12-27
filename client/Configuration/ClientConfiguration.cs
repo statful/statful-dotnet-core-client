@@ -5,134 +5,236 @@ namespace Statful.Core.Client.Configuration
 {
     public class ClientConfiguration : IClientConfiguration
     {
-        public ClientConfiguration(string prefix, string transport) {
-            if (string.IsNullOrWhiteSpace(prefix)) {
-                throw new ArgumentException("prefix cannot be null or empty string!","prefix");
-            }
-            if (string.IsNullOrWhiteSpace(transport)) {
-                throw new ArgumentException("transport cannot be null or empty string!","transport");
-            }
-            this.Prefix = prefix;
-            this.Transport = transport;
+        private ClientConfiguration(string host,
+                                    int port,
+                                    bool secure,
+                                    int timeout,
+                                    string token,
+                                    string app,
+                                    bool dryrun,
+                                    bool cacheDns,
+                                    string tags,
+                                    int flushInterval,
+                                    int sampleRate,
+                                    string ns,
+                                    string path,
+                                    string transport,
+                                    ILogger logger)
+        {
+            this.host = host;
+            this.port = port;
+            this.secure = secure;
+            this.timeout = timeout;
+            this.token = token;
+            this.app = app;
+            this.dryrun = dryrun;
+            this.cacheDns = cacheDns;
+            this.tags = tags;
+            this.flushInterval = flushInterval;
+            this.sampleRate = sampleRate;
+            this.ns = ns;
+            this.path = path;
+            this.transport = transport;
+            this.logger = logger;
         }
 
-        private string host = "127.0.0.1";
-        private int port = 80;
-        private bool secure = true;
-        private int timeout = 2000;
-        private string token = String.Empty;
-        private string app = string.Empty;
-        private bool dryrun = false;
-        private bool cacheDns = false;
-        private string tags = string.Empty;
-        private int flushInterval = 10000;
-        private int sampleRate = 100;
-        private string ns = "application";
-        private string path = string.Empty;
-        private string transport = String.Empty;
-        private string prefix = String.Empty;
-        private ILogger logger = new SilentLogger();
-        
+        private string host;
+        private int port;
+        private bool secure;
+        private int timeout;
+        private string token;
+        private string app;
+        private bool dryrun;
+        private bool cacheDns;
+        private string tags;
+        private int flushInterval;
+        private int sampleRate;
+        private string ns;
+        private string path;
+        private string transport;
+        private ILogger logger;
+
         public string Host
         {
             get { return this.host; }
-            set { this.host = value; }
         }
 
         public int Port
         {
             get { return this.port; }
-            set { this.port = value; }
-        }
-
-        public string Prefix
-        {
-            get { return this.prefix; }
-            set { this.prefix = value; }
         }
 
         public string Transport
         {
             get { return this.transport; }
-            set { this.transport = value; }
         }
 
         public bool Secure
         {
             get { return this.secure; }
-            set { this.secure = value; }
         }
 
         public int Timeout
         {
             get { return this.timeout; }
-            set { this.timeout = value; }
         }
 
         public string Token
         {
             get { return this.token; }
-            set { this.token = value; }
         }
 
         public string App
         {
             get { return this.app; }
-            set { this.app = value; }
         }
 
         public bool Dryrun
         {
             get { return this.dryrun; }
-            set { this.dryrun = value; }
         }
 
         public ILogger Logger
         {
             get { return this.logger; }
-            set
-            {
-                if (value == null) {
-                    return;
-                }
-                this.logger = value;
-            }
         }
 
         public bool CacheDns
         {
             get { return this.cacheDns; }
-            set { this.cacheDns = value; }
         }
 
         public string Tags
         {
             get { return this.tags; }
-            set { this.tags = value; }
         }
 
         public int FlushInterval
         {
             get { return this.flushInterval; }
-            set { this.flushInterval = value; }
         }
 
         public int SampleRate
         {
             get { return this.sampleRate; }
-            set { this.sampleRate = value; }
         }
 
         public string Namespace
         {
             get { return this.ns; }
-            set { this.ns = value; }
         }
 
         public string Path
         {
             get { return this.path; }
-            set { this.path = value; }
+        }
+
+        public class Builder
+        {
+            string host = "api.statful.com";
+            int port = 443;
+            bool secure = true;
+            int timeout = 2000;
+            string token = String.Empty;
+            string app = string.Empty;
+            bool dryrun = false;
+            bool cacheDns = false;
+            string tags = string.Empty;
+            int flushInterval = 10000;
+            int sampleRate = 100;
+            string ns = "application";
+            string path = "tel/v2.0/metrics";
+            string transport = "http";
+            ILogger logger = new SilentLogger();
+
+            public Builder withHost(String host)
+            {
+                this.host = host;
+                return this;
+            }
+
+            public Builder withPort(int port)
+            {
+                this.port = port;
+                return this;
+            }
+
+            public Builder withSecure(bool secure)
+            {
+                this.secure = secure;
+                return this;
+            }
+
+            public Builder withTimeout(int timeout)
+            {
+                this.timeout = timeout;
+                return this;
+            }
+
+            public Builder withToken(String token)
+            {
+                this.token = token;
+                return this;
+            }
+
+            public Builder withApp(String app)
+            {
+                this.app = app;
+                return this;
+            }
+
+            public Builder withDryRun(bool dryRun)
+            {
+                this.dryrun = dryRun;
+                return this;
+            }
+
+            public Builder withCacheDNS(bool cacheDns)
+            {
+                this.cacheDns = cacheDns;
+                return this;
+            }
+
+            public Builder withTags(String tags)
+            {
+                this.tags = tags;
+                return this;
+            }
+            public Builder withFlushInterval(int flushInterval)
+            {
+                this.flushInterval = flushInterval;
+                return this;
+            }
+            public Builder withSamplerate(int sampleRate)
+            {
+                this.sampleRate = sampleRate;
+                return this;
+            }
+            public Builder withNamespace(String ns)
+            {
+                this.ns = ns;
+                return this;
+            }
+            public Builder withPath(String path)
+            {
+                this.path = path;
+                return this;
+            }
+            public Builder withTransport(String transport)
+            {
+                this.transport = transport;
+                return this;
+            }
+            public Builder withLogger(ILogger logger)
+            {
+                this.logger = logger;
+                return this;
+            }
+
+            public ClientConfiguration Build()
+            {
+                return new ClientConfiguration(host, port, secure, timeout, token, app, dryrun, cacheDns, tags, flushInterval, sampleRate, ns, path, transport, logger);
+            }
         }
     }
 }

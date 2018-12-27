@@ -97,8 +97,7 @@ namespace Statful.Core.Client.Client
         private string BuildMessage(string metric, string tags, decimal value, string aggregations, int frequency, int samplerate)
         {
             var messageBuilder = new MessageBuilder(this.timestamp);
-            return messageBuilder.WithPrefix(this.configurationGateway.Prefix)
-                .WithNamespace(this.configurationGateway.Namespace)
+            return messageBuilder.WithNamespace(this.configurationGateway.Namespace)
                 .WithMetricName(metric)
                 .WithTags(tags)
                 .WithValue(value)

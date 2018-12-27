@@ -4,15 +4,15 @@ using Statful.Core.Client.Utils.Logging;
 
 namespace Statful.Core.Client.Configuration
 {
-    public class ClientConfigurationFileGateway : ConfigurationSection, IClientConfiguration
+    public class ClientConfigurationFileReader : ConfigurationSection, IClientConfiguration
     {
         public const string SectionName = "TelemetronClient";
         private const string SETTINGS = "Settings";
         private static readonly StatfulSettingsElement settings;
         private static readonly ILogger logger;
 
-        static ClientConfigurationFileGateway() {
-            var section = (ClientConfigurationFileGateway) ConfigurationManager.GetSection(SectionName);
+        static ClientConfigurationFileReader() {
+            var section = (ClientConfigurationFileReader) ConfigurationManager.GetSection(SectionName);
             settings = section.Settings;
             logger = new Log4NetLogger();
         }

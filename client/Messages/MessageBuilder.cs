@@ -11,20 +11,12 @@ namespace Statful.Core.Client.Messages
         private int frequency = 10;
         private string name = string.Empty;
         private string nspace = string.Empty;
-        private string prefix = string.Empty;
         private int samplerate = 100;
         private string tags = string.Empty;
         private decimal value;
 
         public MessageBuilder(ITimestamp timestamp) {
             this.timestamp = timestamp;
-        }
-
-        public IMessageBuilder WithPrefix(string prefix) {
-            if (prefix != null) {
-                this.prefix = prefix;
-            }
-            return this;
         }
 
         public IMessageBuilder WithNamespace(string nspace) {
@@ -88,7 +80,7 @@ namespace Statful.Core.Client.Messages
         }
 
         private string BuildMetricName() {
-            return string.Format("{0}.{1}.{2}", this.prefix, this.nspace, this.name);
+            return string.Format("{0}.{1}", this.nspace, this.name);
         }
 
         private string BuildAggregationsBlock() {
