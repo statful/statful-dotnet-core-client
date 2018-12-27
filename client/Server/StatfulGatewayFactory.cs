@@ -5,14 +5,18 @@ namespace Statful.Core.Client.Server
 {
     internal class StatfulGatewayFactory
     {
-        public IStatfulGateway CreateStatfulGateway(IClientConfiguration config) {
+        public IStatfulGateway CreateStatfulGateway(IClientConfiguration config)
+        {
             IStatfulGateway gateway;
-            switch (config.Transport) {
+            switch (config.Transport)
+            {
                 case "udp":
                     gateway = new UdpStatfulGateway(config);
                     break;
                 case "http":
-                    gateway = new HttpStatfulGateway(config);
+                    gateway = new HttpStatfulGateway.Builder()
+                                    .withConfiguration(config)
+                                    .build();
                     break;
                 case "tcp":
                     throw new NotImplementedException("TCP connection is not yet supported!");
