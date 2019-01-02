@@ -1,26 +1,33 @@
 ﻿using System.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Statful.Core.Client.Utils;
 using Statful.Core.Client.Utils.Logging;
 
 namespace Statful.Core.Client.Configuration
 {
-    public class ClientConfigurationFileReader : ConfigurationSection, IClientConfiguration
+    public class ClientConfigurationFileReader : System.Configuration.ConfigurationSection, IClientConfiguration
     {
-        public const string SectionName = "TelemetronClient";
+        public const string SectionName = "StatfulClient";
         private const string SETTINGS = "Settings";
-        private static readonly StatfulSettingsElement settings;
-        private static readonly ILogger logger;
+        private ILogger logger;
 
-        static ClientConfigurationFileReader() {
-            var section = (ClientConfigurationFileReader) ConfigurationManager.GetSection(SectionName);
-            settings = section.Settings;
+        public ClientConfigurationFileReader(string path, string filename)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(path)
+                .AddJsonFile(filename, optional: false, reloadOnChange: true);
+
+            var configuration = builder.Build();
+
+            settings = configuration.GetSection(SectionName).GetSection(SETTINGS).Get<StatfulSettingsElement>();
             logger = new Log4NetLogger();
         }
 
         [ConfigurationProperty(SETTINGS)]
-        private StatfulSettingsElement Settings
+        private StatfulSettingsElement settings
         {
-            get { return (StatfulSettingsElement) base[SETTINGS]; }
+            get { return (StatfulSettingsElement)base[SETTINGS]; }
             set { base[SETTINGS] = value; }
         }
 
@@ -32,11 +39,6 @@ namespace Statful.Core.Client.Configuration
         public int Port
         {
             get { return settings.Port; }
-        }
-
-        public string Prefix
-        {
-            get { return settings.Prefix; }
         }
 
         public string App

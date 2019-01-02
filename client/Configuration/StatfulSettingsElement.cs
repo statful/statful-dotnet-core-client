@@ -6,7 +6,6 @@ namespace Statful.Core.Client.Configuration
     {
         private const string HOST = "host";
         private const string PORT = "port";
-        private const string PREFIX = "prefix";
         private const string TRANSPORT = "transport";
         private const string SECURE = "secure";
         private const string TIMEOUT = "timeout";
@@ -21,28 +20,21 @@ namespace Statful.Core.Client.Configuration
         private const string PATH = "path";
         private const string PROTOCOL = "protocol";
 
-        [ConfigurationProperty(HOST, IsRequired = false, DefaultValue = "127.0.0.1")]
+        [ConfigurationProperty(HOST, IsRequired = false, DefaultValue = "api.statful.com")]
         public string Host
         {
             get { return (string) this[HOST]; }
             set { this[HOST] = value; }
         }
 
-        [ConfigurationProperty(PORT, IsRequired = false, DefaultValue = 2013)]
+        [ConfigurationProperty(PORT, IsRequired = false, DefaultValue = 443)]
         public int Port
         {
             get { return (int) this[PORT]; }
             set { this[PORT] = value; }
         }
 
-        [ConfigurationProperty(PREFIX, IsRequired = true)]
-        public string Prefix
-        {
-            get { return (string) this[PREFIX]; }
-            set { this[PREFIX] = value; }
-        }
-
-        [ConfigurationProperty(TRANSPORT, IsRequired = true)]
+        [ConfigurationProperty(TRANSPORT, IsRequired = false, DefaultValue = "http")]
         public string Transport
         {
             get { return (string) this[TRANSPORT]; }
@@ -63,7 +55,7 @@ namespace Statful.Core.Client.Configuration
             set { this[TIMEOUT] = value; }
         }
 
-        [ConfigurationProperty(TOKEN, IsRequired = false, DefaultValue = "")]
+        [ConfigurationProperty(TOKEN, IsRequired = true)]
         public string Token
         {
             get { return (string) this[TOKEN]; }
@@ -119,7 +111,7 @@ namespace Statful.Core.Client.Configuration
             set { this[DOMAIN] = value; }
         }
 
-        [ConfigurationProperty(PATH, IsRequired = false, DefaultValue = "")]
+        [ConfigurationProperty(PATH, IsRequired = false, DefaultValue = "tel/v2.0/metrics")]
         public string Path
         {
             get { return (string) this[PATH]; }
