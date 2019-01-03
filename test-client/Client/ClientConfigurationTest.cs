@@ -5,8 +5,6 @@ using Statful.Core.Client.Client;
 using Statful.Core.Client.Configuration;
 using Statful.Core.Client;
 using System;
-using System.IO;
-
 namespace test_client.Client
 {
     public class ClientConfigurationTest
