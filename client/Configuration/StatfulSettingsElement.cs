@@ -12,7 +12,7 @@ namespace Statful.Core.Client.Configuration
         private const string TOKEN = "token";
         private const string APP = "app";
         private const string DRYRUN = "dryrun";
-        private const string CACHE_DNS = "cache_dns";
+        private const string CACHE_DNS = "cacheDns";
         private const string TAGS = "tags";
         private const string SAMPLE_RATE = "sampleRate";
         private const string FLUSH_INTERVAL = "flushInterval";
