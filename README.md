@@ -13,7 +13,7 @@ Statful client for .NET Core applications. This client is intended to gather met
 
 ## Installation 
 
-To install simply run:
+To install the client simply run:
 
     dotnet add package statful-client-dotnet-core --version 1.0.0-alpha
 
@@ -22,10 +22,6 @@ To install simply run:
 | Statful client Version | Tested .NET Core versions  |
 |:---|:---|
 | 1.x.x | `2.1.500`|
-
-## Installation
-
-Install the StatfulDotnetCoreClient nuget package and you are ready to use it. 
 
 ## Quick start
 
