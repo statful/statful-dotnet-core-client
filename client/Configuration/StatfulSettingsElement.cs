@@ -6,43 +6,34 @@ namespace Statful.Core.Client.Configuration
     {
         private const string HOST = "host";
         private const string PORT = "port";
-        private const string PREFIX = "prefix";
         private const string TRANSPORT = "transport";
         private const string SECURE = "secure";
         private const string TIMEOUT = "timeout";
         private const string TOKEN = "token";
         private const string APP = "app";
         private const string DRYRUN = "dryrun";
-        private const string CACHE_DNS = "cache_dns";
+        private const string CACHE_DNS = "cacheDns";
         private const string TAGS = "tags";
-        private const string SAMPLE_RATE = "sample_rate";
-        private const string FLUSH_INTERVAL = "flush_interval";
+        private const string SAMPLE_RATE = "sampleRate";
+        private const string FLUSH_INTERVAL = "flushInterval";
         private const string DOMAIN = "domain";
         private const string PATH = "path";
-        private const string PROTOCOL = "protocol";
 
-        [ConfigurationProperty(HOST, IsRequired = false, DefaultValue = "127.0.0.1")]
+        [ConfigurationProperty(HOST, IsRequired = false, DefaultValue = "api.statful.com")]
         public string Host
         {
             get { return (string) this[HOST]; }
             set { this[HOST] = value; }
         }
 
-        [ConfigurationProperty(PORT, IsRequired = false, DefaultValue = 2013)]
+        [ConfigurationProperty(PORT, IsRequired = false, DefaultValue = 443)]
         public int Port
         {
             get { return (int) this[PORT]; }
             set { this[PORT] = value; }
         }
 
-        [ConfigurationProperty(PREFIX, IsRequired = true)]
-        public string Prefix
-        {
-            get { return (string) this[PREFIX]; }
-            set { this[PREFIX] = value; }
-        }
-
-        [ConfigurationProperty(TRANSPORT, IsRequired = true)]
+        [ConfigurationProperty(TRANSPORT, IsRequired = false, DefaultValue = "http")]
         public string Transport
         {
             get { return (string) this[TRANSPORT]; }
@@ -63,7 +54,7 @@ namespace Statful.Core.Client.Configuration
             set { this[TIMEOUT] = value; }
         }
 
-        [ConfigurationProperty(TOKEN, IsRequired = false, DefaultValue = "")]
+        [ConfigurationProperty(TOKEN, IsRequired = true)]
         public string Token
         {
             get { return (string) this[TOKEN]; }
@@ -119,18 +110,11 @@ namespace Statful.Core.Client.Configuration
             set { this[DOMAIN] = value; }
         }
 
-        [ConfigurationProperty(PATH, IsRequired = false, DefaultValue = "")]
+        [ConfigurationProperty(PATH, IsRequired = false, DefaultValue = "tel/v2.0/metrics")]
         public string Path
         {
             get { return (string) this[PATH]; }
             set { this[PATH] = value; }
-        }
-
-        [ConfigurationProperty(PROTOCOL, IsRequired = false, DefaultValue = "")]
-        public string Protocol
-        {
-            get { return (string) this[PROTOCOL]; }
-            set { this[PROTOCOL] = value; }
         }
     }
 }
