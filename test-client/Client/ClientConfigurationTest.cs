@@ -11,10 +11,14 @@ namespace test_client.Client
 {
     public class ClientConfigurationTest
     {
+
         [Test]
 
         public void Test_client_configuration_from_file(){
-            IStatfulClient client = StatfulClientFactory.CreateStatfulClient("/home/francisco/IdeaProjects/statful-dotnet-core-client/test-client", "appsettings.json");
+            string filePath = AppDomain.CurrentDomain.BaseDirectory;
+            string fileName = "appsettings.json";
+
+            IStatfulClient client = StatfulClientFactory.CreateStatfulClient(filePath, fileName);
             
             Assert.NotNull(client);
         }
