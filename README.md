@@ -119,7 +119,7 @@ The custom options that can be set on config param are detailed below.
 | maxBufferSize | Defines how many metrics at max are kept in the buffer between forced flushes. | `number` | `5000` | **NO** |
 | path | Defines the api path to where the metrics should be sent. | `string` | `tel/v2.0/metrics` | **NO** |
 | transport | Defines the transport layer to be used to send metrics. **Valid Transports:** `udp`, `http` | `string` | `http` | **NO**
-| logger | Defines logger library. | `string` | `SilentLogger` | **NO ** |
+| logger | Defines logger library. | `string` | `SilentLogger` | **NO** |
 
 ## Authors
 
