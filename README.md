@@ -6,8 +6,7 @@ Statful client for .NET Core applications. This client is intended to gather met
 * [Supported Versions of .NET Core](#supported-versions-of-.net-core)
 * [Installation](#installation)
 * [Quick Start](#quick-start)
-* [Defaults Configuration Per Method](#defaults-configuration-per-method)
-* [Client Configuration](#client-configuration)
+* [Examples](#examples)
 * [Reference](#reference)
 * [Authors](#authors)
 * [License](#license)
@@ -24,13 +23,15 @@ To install simply run:
 |:---|:---|
 | 1.x.x | `2.1.500`|
 
-## Quick start
+## Installation
 
 Install the StatfulDotnetCoreClient nuget package and you are ready to use it. 
 
+## Quick start
+
 You can configure the client programmatically or by using a configuration file.
 
-## Programmatically
+### Programmatically
 Create an instance of `ClientConfiguration` to set all desired parameters like the following sample:
 ```c#
 using Statful.Client.Core.Configuration;
@@ -74,7 +75,9 @@ The configuration file is a json document that follows the structure:
 
 ```
 
-## Initialize client
+## Examples
+
+### Initialize client
 
 Initialize the client by creating an instance of `IStatfulClient` through `StatfulClientFactory`:
 
@@ -107,26 +110,32 @@ client.Time("name", 10, "tag1=sample", null);
     Gauge -> appends a prefix `gauge` to the metric name and, if none are specified, sets `last` aggregation as default;
     
     Put -> sends the metric as is;
+    
+## Reference
 
-## Client Configuration
+Reference if you want to take full advantage from Statful.    
 
-General configuration for a Statful client.
+### Global Configuration
 
-    * host [optional] [default: 'api.statful.com']
-    * port [optional] [default: 443]
-    * secure [optional] [default: true] - enable or disable https
-    * timeout [optional] [default: 2000ms] - timeout for http transport
-    * token - An authentication token to send to Statful
-    * app [optional] - if specified set a tag ‘app=foo’
-    * dryrun [optional] [default: false] - debug log metrics when flushing the buffer
-    * tags [optional] - global list of tags to set, these are merged with custom tags set on method calls with priority to custom tags
-    * sampleRate [optional] [default: 100] [between: 1-100] - global rate sampling
-    * ns [optional] [default: 'application'] - default namespace
-    * flushInterval [optional] [default: 10000] - defines an interval to periodically flush the buffer based on time
-    * maxBufferSize [optional] [default: 5000] - defines how many metrics at max are kept in the buffer between forced flushes
-    * path [optional] [default: 'tel/v2.0/metrics'] - defines the endpoint to send metrics to
-    * transport [optional] [default: 'http'] - type of transport to be used when sending metrics to statful (UDP/HTTP)
-    * logger [optional] [default: SilentLogger] - defines logger library
+The custom options that can be set on config param are detailed below.
+
+| Option | Description | Type | Default | Required |
+|:---|:---|:---|:---|:---|
+| host | Defines the host name to where the metrics should be sent. |  `string` | `api.statful.com` | **NO** |
+| port | Defines the port. |  `string` | `443` | **NO** |
+| secure | Enable or disable HTTPS. | `boolean` | `true`| **NO** |
+| timeout | Defines the timeout for the transport layers in **miliseconds**. | `number` | 2000 | **NO** |
+| token | Defines the token to be used. | `string` | **undefined** | **YES** |
+| app | Defines the application global name. If specified sets a global tag `app=setValue`. | `string` | **undefined** | **NO** |
+| dryrun | Debug log metrics when flushing the buffer. | `boolean` | `false` | **NO**|
+| tags | Define global list of tags to set, these are merged with custom tags set on method calls with priority to custom tags. | `string` | **undefined** | **NO** |
+| sampleRate | Defines the rate sampling. Should be a number between **[1, 100]**. | `number` | `100` | **NO**|
+| ns | Defines the global namespace. | `string` | `application` | **NO** | 
+| flushInterval | Defines an interval to periodically flush the buffer based on time. | `number` | `10000` | **NO**|
+| maxBufferSize | Defines how many metrics at max are kept in the buffer between forced flushes. | `number` | `5000` | **NO** |
+| path | Defines the api path to where the metrics should be sent. | `string` | `tel/v2.0/metrics` | **NO** |
+| transport | Defines the transport layer to be used to send metrics. **Valid Transports:** `udp`, `http` | `string` | `http` | **NO**
+| logger | Defines logger library. | `string` | `SilentLogger` | **NO** |
 
 ## Authors
 
