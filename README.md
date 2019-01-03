@@ -12,6 +12,12 @@ Statful client for .NET Core applications. This client is intended to gather met
 * [Authors](#authors)
 * [License](#license)
 
+## Installation 
+
+To install simply run:
+
+    dotnet add package statful-client-dotnet-core --version 1.0.0-alpha
+
 ## Supported Versions of .NET Core
 
 | Statful client Version | Tested .NET Core versions  |
@@ -27,6 +33,11 @@ You can configure the client programmatically or by using a configuration file.
 ## Programmatically
 Create an instance of `ClientConfiguration` to set all desired parameters like the following sample:
 ```c#
+using Statful.Client.Core.Configuration;
+        .
+        .
+        .
+
 IClientConfiguration configuration = new ClientConfiguration.Builder()
                                                             .withHost("host")
                                                             .withPort(443)
@@ -37,7 +48,7 @@ IClientConfiguration configuration = new ClientConfiguration.Builder()
                                                             Build();
 ```
 ## Configuration File
-The configuration file is a json document that follows the following structure:
+The configuration file is a json document that follows the structure:
 
 ```c#
 {
@@ -65,9 +76,14 @@ The configuration file is a json document that follows the following structure:
 
 ## Initialize client
 
-Then create an instance of `IStatfulClient` by using `StatfulClientFactory`:
+Initialize the client by creating an instance of `IStatfulClient` through `StatfulClientFactory`:
 
 ```c# 
+using Statful.Core.Client.Client;
+            . 
+            .
+            .
+
 IStatfulClient client = StatfulClientFactory.CreateStatfulClient("pathToFile", "filename"); // Creates configured client from a file
 
 OR
