@@ -14,11 +14,10 @@ namespace Statful.Core.Client.Configuration
         private const string DRYRUN = "dryrun";
         private const string CACHE_DNS = "cache_dns";
         private const string TAGS = "tags";
-        private const string SAMPLE_RATE = "sample_rate";
-        private const string FLUSH_INTERVAL = "flush_interval";
+        private const string SAMPLE_RATE = "sampleRate";
+        private const string FLUSH_INTERVAL = "flushInterval";
         private const string DOMAIN = "domain";
         private const string PATH = "path";
-        private const string PROTOCOL = "protocol";
 
         [ConfigurationProperty(HOST, IsRequired = false, DefaultValue = "api.statful.com")]
         public string Host
@@ -116,13 +115,6 @@ namespace Statful.Core.Client.Configuration
         {
             get { return (string) this[PATH]; }
             set { this[PATH] = value; }
-        }
-
-        [ConfigurationProperty(PROTOCOL, IsRequired = false, DefaultValue = "")]
-        public string Protocol
-        {
-            get { return (string) this[PROTOCOL]; }
-            set { this[PROTOCOL] = value; }
         }
     }
 }
