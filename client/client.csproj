@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackageId>statful-client-dotnet-core</PackageId>
+    <Version>1.0.0-alpha</Version>
+    <Authors>Francisco Mota</Authors>
+    <Company>Mindera</Company>
   </PropertyGroup>
 
   <ItemGroup>
