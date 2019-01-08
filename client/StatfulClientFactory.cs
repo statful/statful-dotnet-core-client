@@ -9,9 +9,9 @@ namespace Statful.Core.Client
 {
     public static class StatfulClientFactory
     {
-        public static IStatfulClient CreateStatfulClient()
+        public static IStatfulClient CreateStatfulClient(string path, string filename)
         {
-            var config = new ClientConfigurationFileReader();
+            var config = new ClientConfigurationFileReader(path, filename);
             return CreateStatfulClient(config);
         }
 
