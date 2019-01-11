@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <PackageId>statful-client-dotnet-core</PackageId>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>statful-client-dotnet-standard</PackageId>
     <Version>1.0.0-alpha</Version>
     <Authors>Francisco Mota</Authors>
     <Company>Mindera</Company>
