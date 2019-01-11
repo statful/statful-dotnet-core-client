@@ -58,7 +58,11 @@ namespace Statful.Core.Client.Client
             }
             if (tags == null)
             {
-                tags = string.Empty;
+                tags = configurationGateway.Tags;
+            }
+            else
+            {
+                tags = configurationGateway.Tags + "," + tags;
             }
             if (aggregations == null)
             {
