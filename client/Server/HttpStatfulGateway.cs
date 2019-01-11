@@ -28,7 +28,7 @@ namespace Statful.Core.Client.Server
             this.InitHttpClient(config, client);
         }
 
-        public async void SendAsync(string message)
+        public void SendAsync(string message)
         {
             if (message == null)
             {
@@ -37,19 +37,22 @@ namespace Statful.Core.Client.Server
 
             this.logger.InfoFormat("sending to {0} at {1} message: {2}", this.client.BaseAddress.AbsoluteUri, DateTime.Now.ToLongTimeString(), message);
 
-            try
+            Task.Run(async () =>
             {
-                var result = await this.client.PutAsync("", new StringContent(message)).ConfigureAwait(false);
-                this.logger.DebugFormat("Request: {0}", result.RequestMessage.ToString());
-                this.logger.DebugFormat("Response: {0}", result.ToString());
-            }
-            catch (Exception ex)
-            {
-                this.logger.Error("Error occured while sending messages through http/https.");
-                this.logger.ErrorFormat("Exception Message: {0}", ex.Message);
-                this.logger.DebugFormat("Stack Trace: {0}", ex.StackTrace);
-            }
-    }
+                try
+                {
+                    var result = await this.client.PutAsync("", new StringContent(message)).ConfigureAwait(false);
+                    this.logger.DebugFormat("Request: {0}", result.RequestMessage.ToString());
+                    this.logger.DebugFormat("Response: {0}", result.ToString());
+                }
+                catch (Exception ex)
+                {
+                    this.logger.Error("Error occured while sending messages through http/https.");
+                    this.logger.ErrorFormat("Exception Message: {0}", ex.Message);
+                    this.logger.DebugFormat("Stack Trace: {0}", ex.StackTrace);
+                }
+            });
+        }
 
     public void Dispose()
     {
