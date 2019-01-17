@@ -75,9 +75,9 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Inc("inc", 10, "tag1=value1", null, 10, 50);
+                client.Inc("inc", 10, "tag2=value2", null, 10, 50);
 
-                var expected = "domain.counter.inc,app=appname,tag1=value1 10 1000 sum,count,10 50";
+                var expected = "domain.counter.inc,app=appname,tag1=value1,tag2=value2 10 1000 sum,count,10 50";
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
@@ -90,9 +90,9 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Inc("inc", 10, "tag1=value1", "avg", 10, 50);
+                client.Inc("inc", 10, "tag2=value2", "avg", 10, 50);
 
-                var expected = "domain.counter.inc,app=appname,tag1=value1 10 1000 avg,10 50";
+                var expected = "domain.counter.inc,app=appname,tag1=value1,tag2=value2 10 1000 avg,10 50";
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
@@ -105,7 +105,7 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer.Object, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Inc("inc", 10, "tag1=value1", "sum,count", 10, 50);
+                client.Inc("inc", 10, "tag2=value2", "sum,count", 10, 50);
 
                 messageBuffer.Verify((mb) => mb.Save(It.IsAny<string>()), Times.Never);
             }
@@ -114,12 +114,12 @@ namespace Statful.Core.Client.UnitTests.Client
             public void Should_save_counter_message_When_message_is_within_sample_rate()
             {
                 var messageBuffer = new MessageBufferFake();
-                var expected = "domain.counter.inc,app=appname,tag1=value1 10 1000 sum,count,10 50";
+                var expected = "domain.counter.inc,app=appname,tag1=value1,tag2=value2 10 1000 sum,count,10 50";
                 this.luckyCoin.Setup((lc) => lc.Throw(It.IsAny<int>())).Returns(true);
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Inc("inc", 10, "tag1=value1", "sum,count", 10, 50);
+                client.Inc("inc", 10, "tag2=value2", "sum,count", 10, 50);
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
@@ -161,9 +161,9 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Gauge("name", 10, "tag1=value1", null, 10, 50);
+                client.Gauge("name", 10, "tag2=value2", null, 10, 50);
 
-                var expected = "domain.gauge.name,app=appname,tag1=value1 10 1000 last,10 50";
+                var expected = "domain.gauge.name,app=appname,tag1=value1,tag2=value2 10 1000 last,10 50";
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
@@ -176,9 +176,9 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Gauge("name", 10, "tag1=value1", "avg", 10, 50);
+                client.Gauge("name", 10, "tag2=value2", "avg", 10, 50);
 
-                var expected = "domain.gauge.name,app=appname,tag1=value1 10 1000 avg,10 50";
+                var expected = "domain.gauge.name,app=appname,tag1=value1,tag2=value2 10 1000 avg,10 50";
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
@@ -191,7 +191,7 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer.Object, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Gauge("name", 10, "tag1=value1", "sum,count", 10, 50);
+                client.Gauge("name", 10, "tag2=value2", "sum,count", 10, 50);
 
                 messageBuffer.Verify((mb) => mb.Save(It.IsAny<string>()), Times.Never());
             }
@@ -199,13 +199,13 @@ namespace Statful.Core.Client.UnitTests.Client
             [Test]
             public void Should_save_gauge_message_When_is_within_sample_rate()
             {
-                var expected = "domain.gauge.name,app=appname,tag1=value1 10 1000 sum,count,10 50";
+                var expected = "domain.gauge.name,app=appname,tag1=value1,tag2=value2 10 1000 sum,count,10 50";
                 var messageBuffer = new MessageBufferFake();
                 this.luckyCoin.Setup((lc) => lc.Throw(It.IsAny<int>())).Returns(true);
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Gauge("name", 10, "tag1=value1", "sum,count", 10, 50);
+                client.Gauge("name", 10, "tag2=value2", "sum,count", 10, 50);
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
@@ -247,9 +247,9 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Time("name", 10, "tag1=value1", null, 10, 50);
+                client.Time("name", 10, "tag2=value2", null, 10, 50);
 
-                var expected = "domain.timer.name,app=appname,tag1=value1 10 1000 avg,p90,count,10 50";
+                var expected = "domain.timer.name,app=appname,tag1=value1,tag2=value2 10 1000 avg,p90,count,10 50";
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
@@ -262,9 +262,9 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Time("name", 10, "tag1=value1", "avg", 10, 50);
+                client.Time("name", 10, "tag2=value2", "avg", 10, 50);
 
-                var expected = "domain.timer.name,app=appname,tag1=value1 10 1000 avg,10 50";
+                var expected = "domain.timer.name,app=appname,tag1=value1,tag2=value2 10 1000 avg,10 50";
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
@@ -277,7 +277,7 @@ namespace Statful.Core.Client.UnitTests.Client
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer.Object, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Time("name", 10, "tag1=value1", "sum,count", 10, 50);
+                client.Time("name", 10, "tag2=value2", "sum,count", 10, 50);
 
                 messageBuffer.Verify((mb) => mb.Save(It.IsAny<string>()), Times.Never());
             }
@@ -285,13 +285,13 @@ namespace Statful.Core.Client.UnitTests.Client
             [Test]
             public void Should_save_time_message_When_message_is_within_sample_rate()
             {
-                var expected = "domain.timer.time,app=appname,tag1=value1 10 1000 sum,count,10 50";
+                var expected = "domain.timer.time,app=appname,tag1=value1,tag2=value2 10 1000 sum,count,10 50";
                 var messageBuffer = new MessageBufferFake();
                 this.luckyCoin.Setup((lc) => lc.Throw(It.IsAny<int>())).Returns(true);
                 this.timestamp.Setup((ts) => ts.Now()).Returns(1000);
                 var client = new StatfulClient(this.configurationGateway, messageBuffer, this.timestamp.Object, this.luckyCoin.Object);
 
-                client.Time("time", 10, "tag1=value1", "sum,count", 10, 50);
+                client.Time("time", 10, "tag2=value2", "sum,count", 10, 50);
 
                 Assert.AreEqual(expected, messageBuffer.message);
             }
