@@ -1,9 +1,9 @@
-# statful-dotnet-core-client
-Statful client for .NET Core applications. This client is intended to gather metrics and send them to Statful.
+# statful-dotnet-standard-client
+Statful client for .NET Standard applications. This client is intended to gather metrics and send them to Statful.
 
 ## Table of Contents
 
-* [Supported Versions of .NET Core](#supported-versions-of-.net-core)
+* [Supported Versions of .NET Standard](#supported-versions-of-.net-standard)
 * [Installation](#installation)
 * [Quick Start](#quick-start)
 * [Examples](#examples)
@@ -15,13 +15,13 @@ Statful client for .NET Core applications. This client is intended to gather met
 
 To install the client simply run:
 
-    dotnet add package statful-client-dotnet-core --version 1.0.0-alpha
+    dotnet add package statful-client-dotnet-standard --version 1.0.0-alpha
 
-## Supported Versions of .NET Core
+## Supported Versions of .NET Standard
 
-| Statful client Version | Tested .NET Core versions  |
+| Statful client Version | Tested .NET Standard versions  |
 |:---|:---|
-| 1.x.x | `2.1.500`|
+| 1.x.x | `2.0`|
 
 ## Quick start
 
@@ -140,4 +140,4 @@ The custom options that can be set on config param are detailed below.
 
 ## License
 
-Statful .NET Core Client is available under the MIT license. See the [LICENSE](https://raw.githubusercontent.com/statful/statful-dotnet-core-client/master/LICENSE) file for more information.
+Statful .NET Standard Client is available under the MIT license. See the [LICENSE](https://raw.githubusercontent.com/statful/statful-dotnet-standard-client/master/LICENSE) file for more information.
