@@ -10,12 +10,13 @@ namespace Statful.Core.Client.Configuration
     {
         public const string SectionName = "StatfulClient";
         private const string SETTINGS = "Settings";
+
+        private const string filename = "appsettings.json";
         private ILogger logger;
 
-        public ClientConfigurationFileReader(string path, string filename)
+        public ClientConfigurationFileReader()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(path)
                 .AddJsonFile(filename, optional: false, reloadOnChange: true);
 
             var configuration = builder.Build();

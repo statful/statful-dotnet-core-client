@@ -45,7 +45,7 @@ IClientConfiguration configuration = new ClientConfiguration.Builder()
                                                             Build();
 ```
 ## Configuration File
-The configuration file is a json document that follows the structure:
+The configuration file is a json document named "appsettings.json" that follows the structure:
 
 ```c#
 {
@@ -68,8 +68,9 @@ The configuration file is a json document that follows the structure:
         }
     }
 }
-
 ```
+
+Note: this file must be in the project's root directory.
 
 ## Examples
 
@@ -83,7 +84,7 @@ using Statful.Core.Client.Client;
             .
             .
 
-IStatfulClient client = StatfulClientFactory.CreateStatfulClient("pathToFile", "filename"); // Creates configured client from a file
+IStatfulClient client = StatfulClientFactory.CreateStatfulClient(); // Creates configured client from appsettings.json
 
 OR
 

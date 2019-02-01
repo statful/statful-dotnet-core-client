@@ -5,6 +5,10 @@ using Statful.Core.Client.Client;
 using Statful.Core.Client.Configuration;
 using Statful.Core.Client;
 using System;
+using System.Text.RegularExpressions;
+using System.IO;
+using Microsoft.Extensions.Configuration;
+
 namespace test_client.Client
 {
     public class ClientConfigurationTest
@@ -12,11 +16,8 @@ namespace test_client.Client
 
         [Test]
 
-        public void Test_client_configuration_from_file(){
-            string filePath = AppDomain.CurrentDomain.BaseDirectory;
-            string fileName = "appsettings.json";
-
-            IStatfulClient client = StatfulClientFactory.CreateStatfulClient(filePath, fileName);
+        public void Test_client_configuration_from_file() {
+            IStatfulClient client = StatfulClientFactory.CreateStatfulClient();
             
             Assert.NotNull(client);
         }
